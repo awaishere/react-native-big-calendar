@@ -48,6 +48,32 @@ export function getDatesInNextThreeDays(
   return days
 }
 
+export function getDatesInNextFourDays(
+  date: string | Date | dayjs.Dayjs = new Date(),
+  locale = 'en',
+) {
+  const subject = dayjs(date).locale(locale)
+  const days = Array(4)
+    .fill(0)
+    .map((_, i) => {
+      return subject.add(i, 'day')
+    })
+  return days
+}
+
+export function getDatesInNextSevenDays(
+  date: string | Date | dayjs.Dayjs = new Date(),
+  locale = 'en',
+) {
+  const subject = dayjs(date).locale(locale)
+  const days = Array(7)
+    .fill(0)
+    .map((_, i) => {
+      return subject.add(i, 'day')
+    })
+  return days
+}
+
 export function getDatesInNextOneDay(
   date: string | Date | dayjs.Dayjs = new Date(),
   locale = 'en',
@@ -106,6 +132,10 @@ export function modeToNum(mode: Mode, current?: dayjs.Dayjs | Date, amount = 1):
       return 1 * amount
     case '3days':
       return 3 * amount
+    case '4days':
+      return 4 * amount
+    case '7days':
+      return 7 * amount
     case 'week':
     case 'custom':
       return 7 * amount

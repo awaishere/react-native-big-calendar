@@ -116,6 +116,37 @@ describe('getDatesInNextThreeDays', () => {
   })
 })
 
+describe('getDatesInNextFourDays', () => {
+  const expected = [
+    new Date(2020, 1, 9),
+    new Date(2020, 1, 10),
+    new Date(2020, 1, 11),
+    new Date(2020, 1, 12),
+  ]
+
+  test('sunday', () => {
+    const actual = utils.getDatesInNextFourDays(new Date(2020, 1, 9))
+    assertDateRange(expected, actual)
+  })
+})
+
+describe('getDatesInNextSevenDays', () => {
+  const expected = [
+    new Date(2020, 1, 9),
+    new Date(2020, 1, 10),
+    new Date(2020, 1, 11),
+    new Date(2020, 1, 12),
+    new Date(2020, 1, 13),
+    new Date(2020, 1, 14),
+    new Date(2020, 1, 15),
+  ]
+
+  test('sunday', () => {
+    const actual = utils.getDatesInNextSevenDays(new Date(2020, 1, 9))
+    assertDateRange(expected, actual)
+  })
+})
+
 describe('getCountOfEventsAtEvent', () => {
   test('single event', () => {
     const event = events[0]
@@ -171,6 +202,18 @@ describe('modeToNum', () => {
 
   test('week', () => {
     const mode = 'week'
+    const num = utils.modeToNum(mode)
+    expect(num).toEqual(7)
+  })
+
+  test('4days', () => {
+    const mode = '4days'
+    const num = utils.modeToNum(mode)
+    expect(num).toEqual(4)
+  })
+
+  test('7days', () => {
+    const mode = '7days'
     const num = utils.modeToNum(mode)
     expect(num).toEqual(7)
   })

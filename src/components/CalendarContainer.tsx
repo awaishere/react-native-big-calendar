@@ -8,6 +8,7 @@ import type {
   AllDayEventCellStyle,
   CalendarCellStyle,
   CalendarCellTextStyle,
+  CalendarPagerProps,
   DateRangeHandler,
   EventCellStyle,
   EventRenderer,
@@ -23,7 +24,9 @@ import { useTheme } from '../theme/ThemeContext'
 import {
   getDatesInMonth,
   getDatesInNextCustomDays,
+  getDatesInNextFourDays,
   getDatesInNextOneDay,
+  getDatesInNextSevenDays,
   getDatesInNextThreeDays,
   getDatesInWeek,
   isAllDayEvent,
@@ -36,7 +39,7 @@ import { CalendarHeader } from './CalendarHeader'
 import { CalendarHeaderForMonthView } from './CalendarHeaderForMonthView'
 import { Schedule } from './Schedule'
 
-export interface CalendarContainerProps<T extends ICalendarEventBase> {
+export interface CalendarContainerProps<T extends ICalendarEventBase> extends CalendarPagerProps {
   /**
    * To remove Hours Column from week View.
    */
@@ -219,6 +222,8 @@ function _CalendarContainer<T extends ICalendarEventBase>({
   hideHours = false,
   minHour = 0,
   maxHour = 23,
+  minIndex,
+  maxIndex,
   isEventOrderingEnabled,
   showWeekNumber = false,
   showSixWeeks = false,
@@ -291,6 +296,10 @@ function _CalendarContainer<T extends ICalendarEventBase>({
           return getDatesInWeek(date, weekStartsOn, locale)
         case '3days':
           return getDatesInNextThreeDays(date, locale)
+        case '4days':
+          return getDatesInNextFourDays(date, locale)
+        case '7days':
+          return getDatesInNextSevenDays(date, locale)
         case 'day':
           return getDatesInNextOneDay(date, locale)
         case 'custom':
@@ -406,6 +415,8 @@ function _CalendarContainer<T extends ICalendarEventBase>({
         ref={calendarRef}
         style={{ flex: 1 }}
         pageWrapperStyle={{ flex: 1 }}
+        minIndex={minIndex}
+        maxIndex={maxIndex}
         renderPage={({ index }) => (
           <React.Fragment>
             <HeaderComponentForMonthView
@@ -505,6 +516,8 @@ function _CalendarContainer<T extends ICalendarEventBase>({
   return (
     <InfinitePager
       ref={calendarRef}
+      minIndex={minIndex}
+      maxIndex={maxIndex}
       renderPage={({ index }) => (
         <React.Fragment>
           <HeaderComponent {...headerProps} dateRange={getDateRange(getCurrentDate(index))} />

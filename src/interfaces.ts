@@ -29,7 +29,7 @@ export type CalendarTouchableOpacityProps = {
   disabled: boolean
 }
 
-export type Mode = '3days' | 'week' | 'day' | 'custom' | 'month' | 'schedule'
+export type Mode = '3days' | '4days' | '7days' | 'week' | 'day' | 'custom' | 'month' | 'schedule'
 
 export type EventCellStyle<T extends ICalendarEventBase> =
   | ViewStyle
@@ -51,6 +51,11 @@ export type HasDateRange = [Date, Date]
 export type DateRangeHandler = ([start, end]: HasDateRange) => void
 
 export type HorizontalDirection = 'RIGHT' | 'LEFT'
+
+export interface CalendarPagerProps {
+  minIndex?: number
+  maxIndex?: number
+}
 
 export type EventRenderer<T extends ICalendarEventBase = ICalendarEventBase> = (
   event: T,
