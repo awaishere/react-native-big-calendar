@@ -1,13 +1,16 @@
 {
-  "name": "react-native-big-calendar",
-  "version": "5.0.0-beta.12",
+  "name": "@socketier/react-native-big-calendar",
+  "version": "5.0.0-socketier.0",
   "main": "build/index.js",
   "jsnext:main": "build/index.es.js",
   "module": "build/index.es.js",
   "types": "build/index.d.ts",
-  "repository": "git@github.com:acro5piano/react-native-big-calendar",
-  "author": "gosho-kazuya <ketsume0211@gmail.com>",
+  "repository": "git@github.com:awaishere/react-native-big-calendar",
+  "author": "awaishere <awaishere007@gmail.com>",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "storybook": "storybook dev -p 7007",
     "build-storybook": "NODE_OPTIONS='--openssl-legacy-provider' storybook build -o .storybook-build",
